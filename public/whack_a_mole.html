@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MoleWhacking</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+
+
+	<style type="text/css">
+
+
+		#mainContainer {
+
+			text-align: center;
+		}
+
+
+		/*  SECTIONS  */
+		.section {
+			clear: both;
+			padding: 0px;
+			margin: 0px;
+			
+
+		}
+
+		/*  COLUMN SETUP  */
+		.col {
+			/*display: block;*/
+			float:left;
+			/*margin: 1% 0 1% 1.6%;*/
+			border: 1px solid black;
+			
+		}
+
+		.col:first-child { margin-left: 0; }
+
+		
+		.group:before,
+		.group:after { content:""; display:table; }
+		.group:after { clear:both;}
+		.group { zoom:1; /* For IE 6/7 */ }
+
+
+		
+		.span_3_of_3 { width: 100%; }
+		.span_2_of_3 { width: 66.13%; }
+		.span_1_of_3 { width: 32.26%; }
+
+
+		
+		/*.span_3_of_3 { width: 100%; }
+		.span_2_of_3 { width: 66.13%; }*/
+		.span_1_of_3 { width: 32.26%; }
+
+		
+		
+		.mole {
+
+			visibility: hidden;
+			
+		}
+
+		.insideBox {
+
+			border: 1px solid black;
+		}
+
+		.moleActive {
+
+
+		}
+
+		#inputWrapper {
+
+			float: left;
+			margin-left: 20px;
+		}
+
+
+		#startButton {
+
+			float: left;
+		}
+
+
+	</style>
+
+</head>
+<body>
+<!-- span_1_of_3 -->
+<div id="mainContainer">
+<div class="section group">
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+</div>
+<div class="section group">
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+</div>
+<div class="section group">
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+	<div class="col">
+		<div class"insideBox"><img src="/img/Trollface2.png" class="mole"></div>
+	</div>
+</div>
+</div>
+<button id="startButton">Start Game</button><div id="inputWrapper"><label for="#score">Your Score:</label><input type="text" id="score" readonly></div>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+'use strict';
+var counter = 30;
+var moleBox = $('img');
+var $randomBox = $(moleBox.eq(Math.floor(Math.random() * moleBox.length)));
+var gameInterval;
+var stopGameInterval;
+var gameStarted = false;
+var delay = 3200;
+var delay2 = 3000;
+
+$('#startButton').click(function() {
+	if (!gameStarted) {
+		startTimer();
+		// moleSequence();
+		setGameInterval();
+		gameStarted = true;
+	}
+	
+
+});
+
+function moleSequence(){
+	$randomBox = $(moleBox.eq(Math.floor(Math.random() * moleBox.length)));
+	$randomBox.removeClass('mole')
+	setTimeout(function() {
+		$randomBox.addClass('mole');
+		// clearInterval();
+	}, delay2);
+
+}
+
+function setGameInterval() {
+	gameInterval = setInterval(function() {
+		moleSequence();
+	}, delay)
+}
+
+
+// setGameInterval();
+
+function startTimer() {
+	counter = 30;
+		var timerInterval = setInterval(function() {
+			counter--;
+			console.log(counter);
+			// update displayed time
+			if (counter == 25) {
+				clearInterval(gameInterval);
+				moleBox.addClass('mole');
+				delay = 2500;
+				delay2 = 2300;
+				moleSequence();
+				setGameInterval();
+			
+			} else if (counter == 20) {
+				clearInterval(gameInterval);
+				moleBox.addClass('mole');
+				delay = 2000;
+				delay2 = 1800;
+				moleSequence();
+				setGameInterval();	
+			
+			} else if (counter == 15) {
+				clearInterval(gameInterval);
+				moleBox.addClass('mole');
+				delay = 1800;
+				delay2 = 1600;
+				moleSequence();
+				setGameInterval();
+
+			} else if (counter == 10) {
+				clearInterval(gameInterval);
+				moleBox.addClass('mole');
+				delay = 1700;
+				delay2 = 1400;
+				moleSequence();
+				setGameInterval();
+				
+
+			} else if (counter == 5) {
+				clearInterval(gameInterval);
+				moleBox.addClass('mole');
+				delay = 1500;
+				delay2 = 1200;
+				moleSequence();
+				setGameInterval();
+			} else if (counter == 0) {
+				clearInterval(timerInterval);
+				clearInterval(gameInterval);
+				gameStarted = false;
+				// cancleGameInterval();
+			 	moleBox.addClass('mole');
+			}
+		}, 1000)
+
+
+}
+
+
+
+
+
+
+
+});
+</script>
+
+</body>
+</html>
